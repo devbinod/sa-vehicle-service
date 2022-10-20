@@ -108,6 +108,7 @@ components:
         - brand
         - color
         - purchaseDate
+        - pricePerDay
 
       properties:
         vin:
@@ -123,6 +124,8 @@ components:
         purchaseDate:
           type: string
           format: date
+        pricePerDay:
+          type: number
 
     VehicleDto:
       properties:
@@ -141,3 +144,5 @@ components:
         purchaseDate:
           type: string
           format: date
+        pricePerDay:
+          type: number
