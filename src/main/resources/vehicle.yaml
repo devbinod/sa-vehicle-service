@@ -112,7 +112,7 @@ components:
 
       properties:
         vin:
-          type: string
+          type: integer
         description:
           type: string
         model:
@@ -132,7 +132,7 @@ components:
         id:
           type: string
         vin:
-          type: string
+          type: integer
         description:
           type: string
         model:

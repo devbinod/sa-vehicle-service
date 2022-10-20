@@ -1,0 +1,10 @@
+{        "_class": "edu.miu590.vehicle.entity.Vehicle",
+
+  "brand":"Audi",
+         "color":"Black",
+         "description":"Audi Black Model A8",
+         "model":"A8",
+         "pricePerDay":150,
+         "purchaseDate":"2017-07-16T19:17:57.689Z",
+         "userId":"binodpant.nep@gmail.com",
+         "vin":"63516fb8eb2d495cf"}

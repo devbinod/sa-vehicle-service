@@ -50,7 +50,7 @@
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core -->
+
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
@@ -101,6 +101,7 @@
                             <!--                            </supportingFilesToGenerate>-->
                             <configOptions>
                                 <sourceFolder>src/java/main</sourceFolder>
+                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
                                 <interfaceOnly>true</interfaceOnly>
                             </configOptions>
                         </configuration>
