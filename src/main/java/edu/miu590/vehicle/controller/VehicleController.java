@@ -1,6 +1,8 @@
 package edu.miu590.vehicle.controller;
 
 import edu.miu590.vehicle.api.VehiclesApi;
+
+import edu.miu590.vehicle.model.SearchVehicleDto;
 import edu.miu590.vehicle.model.VehicleDto;
 import edu.miu590.vehicle.model.VehicleRequestDto;
 import edu.miu590.vehicle.services.VehicleDao;
@@ -44,5 +46,17 @@ public class VehicleController implements VehiclesApi {
     @Override
     public ResponseEntity<VehicleDto> updateVehicleById(String id, VehicleRequestDto vehicleRequestDto) {
         return ResponseEntity.ok(vehicleDao.updateById(id,vehicleRequestDto));
+    }
+
+
+//    @Override
+//    public ResponseEntity<List<VehicleDto>> filterVehicle(SearchCarDto searchCarDto) {
+//        return VehiclesApi.super.filterVehicle(searchCarDto);
+//    }
+
+
+    @Override
+    public ResponseEntity<List<VehicleDto>> filterVehicle(SearchVehicleDto searchVehicleDto) {
+        return ResponseEntity.ok(vehicleDao.searchVehicleAvailability(searchVehicleDto));
     }
 }

@@ -98,6 +98,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VehicleDto'
+  /vehicles/search:
+    put:
+      operationId: filterVehicle
+      summary: Filter Vechicle based on pickup and return date
+      tags:
+        - Vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchVehicleDto'
+      responses:
+        '200':
+          description: Successfully Updated Vahicle
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDto'
+
 components:
   schemas:
     VehicleRequestDto:
@@ -146,3 +168,12 @@ components:
           format: date
         pricePerDay:
           type: number
+
+    SearchVehicleDto:
+      properties:
+        returnDate:
+          type: string
+          format: date
+        pickupDate:
+          type: string
+          format: date

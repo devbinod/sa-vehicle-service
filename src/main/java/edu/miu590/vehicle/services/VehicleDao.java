@@ -1,5 +1,7 @@
 package edu.miu590.vehicle.services;
 
+import edu.miu590.vehicle.entity.Vehicle;
+import edu.miu590.vehicle.model.SearchVehicleDto;
 import edu.miu590.vehicle.model.VehicleDto;
 import edu.miu590.vehicle.model.VehicleRequestDto;
 
@@ -16,4 +18,6 @@ public interface VehicleDao {
     VehicleDto findById(String id);
 
     VehicleDto updateById(String id,VehicleRequestDto vehicleRequestDto);
+
+    List<VehicleDto> searchVehicleAvailability(SearchVehicleDto searchVehicleDto);
 }

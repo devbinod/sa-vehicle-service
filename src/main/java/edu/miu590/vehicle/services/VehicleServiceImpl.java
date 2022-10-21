@@ -1,12 +1,15 @@
 package edu.miu590.vehicle.services;
 
+import edu.miu590.vehicle.client.BookingServiceClient;
 import edu.miu590.vehicle.entity.Vehicle;
 import edu.miu590.vehicle.exceptions.VehicleNotFound;
 import edu.miu590.vehicle.mapper.VehicleMapper;
+import edu.miu590.vehicle.model.SearchVehicleDto;
 import edu.miu590.vehicle.model.VehicleDto;
 import edu.miu590.vehicle.model.VehicleRequestDto;
 import edu.miu590.vehicle.repository.VehicleRepository;
 import edu.miu590.vehicle.util.AppUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +20,12 @@ public class VehicleServiceImpl implements VehicleDao {
 
     private final VehicleRepository vehicleRepository;
     private final VehicleMapper vehicleMapper;
+    private final BookingServiceClient bookingServiceClient;
 
-    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, BookingServiceClient bookingServiceClient) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleMapper = vehicleMapper;
+        this.bookingServiceClient = bookingServiceClient;
     }
 
     @Override
@@ -56,6 +61,15 @@ public class VehicleServiceImpl implements VehicleDao {
         Optional<Vehicle> optionalVehicle = vehicleRepository.findById(id);
         if (optionalVehicle.isEmpty()) throw new VehicleNotFound("Vehicle Not found with id" + id);
         return optionalVehicle.get();
+    }
+
+
+    @Override
+    public List<VehicleDto> searchVehicleAvailability(SearchVehicleDto searchVehicleDto) {
+
+        List<String> occupiedVehicleList = bookingServiceClient.searchBookingByDate(searchVehicleDto);
+        return vehicleMapper.toDtoList(vehicleRepository.findByIdNotIn(occupiedVehicleList));
+
     }
 
     private Vehicle createOrSave(String id, VehicleRequestDto vehicleRequestDto) {
