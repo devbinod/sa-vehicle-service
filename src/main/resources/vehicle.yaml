@@ -148,6 +148,10 @@ components:
           format: date
         pricePerDay:
           type: number
+        imageList:
+          type: array
+          items:
+            type: string
 
     VehicleDto:
       properties:
@@ -168,6 +172,10 @@ components:
           format: date
         pricePerDay:
           type: number
+        imageList:
+          type: array
+          items:
+            type: string
 
     SearchVehicleDto:
       properties:

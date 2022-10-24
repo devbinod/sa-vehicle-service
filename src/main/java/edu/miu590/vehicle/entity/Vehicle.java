@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -27,4 +29,5 @@ public class Vehicle {
     private LocalDate purchaseDate;
     private String userId;
     private BigDecimal pricePerDay;
+    private List<String> imageList=new ArrayList<>();
 }
