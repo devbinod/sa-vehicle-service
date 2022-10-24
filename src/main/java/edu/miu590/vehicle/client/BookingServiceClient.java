@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient(name = "${booking.service.feign.name}", url = "${booking.service.feign.url}")
 public interface BookingServiceClient {
 
-    @PutMapping("/bookings/search")
+    @PutMapping("/search")
     List<String> searchBookingByDate(SearchVehicleDto searchVehicleDto);
 
 }
