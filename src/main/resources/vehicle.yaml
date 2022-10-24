@@ -1,0 +1,179 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Detail
+  description: Vehicle Detail
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+tags:
+  - name: Vehicle
+paths:
+  /vehicles:
+    get:
+      operationId: getAllVehicle
+      summary: Return list of vehicles
+      tags:
+        - Vehicle
+      responses:
+        '200':
+          description: List of the Vehicles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDto'
+    post:
+      operationId: saveVehicles
+      summary: Save Vechicle
+      tags:
+        - Vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleRequestDto'
+      responses:
+        '201':
+          description: Vehicle Successfully Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+  /vehicles/{id}:
+    get:
+      operationId: getVehicleById
+      summary: Returns a Vehicle by ID.
+      tags:
+        - Vehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vehicle Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+    delete:
+      operationId: deleteVehicleById
+      summary: Delete a Vehicle by ID.
+      tags:
+        - Vehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted vehicle
+    put:
+      operationId: updateVehicleById
+      summary: Update Vechicle
+      tags:
+        - Vehicle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleRequestDto'
+      responses:
+        '201':
+          description: Successfully Updated Vahicle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+  /vehicles/search:
+    put:
+      operationId: filterVehicle
+      summary: Filter Vechicle based on pickup and return date
+      tags:
+        - Vehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchVehicleDto'
+      responses:
+        '200':
+          description: Successfully Updated Vahicle
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleDto'
+
+components:
+  schemas:
+    VehicleRequestDto:
+      required:
+        - vin
+        - description
+        - model
+        - brand
+        - color
+        - purchaseDate
+        - pricePerDay
+
+      properties:
+        vin:
+          type: integer
+        description:
+          type: string
+        model:
+          type: string
+        brand:
+          type: string
+        color:
+          type: string
+        purchaseDate:
+          type: string
+          format: date
+        pricePerDay:
+          type: number
+
+    VehicleDto:
+      properties:
+        id:
+          type: string
+        vin:
+          type: integer
+        description:
+          type: string
+        model:
+          type: string
+        brand:
+          type: string
+        color:
+          type: string
+        purchaseDate:
+          type: string
+          format: date
+        pricePerDay:
+          type: number
+
+    SearchVehicleDto:
+      properties:
+        returnDate:
+          type: string
+          format: date
+        pickupDate:
+          type: string
+          format: date
